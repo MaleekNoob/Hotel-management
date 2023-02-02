@@ -7,13 +7,14 @@ using namespace std;
 
 class customer {
 private:
-	int customerID, phone_number, NumberOfDays;
+	char name[30];
+	int phone_number, NumberOfDays, roomNumber;
 	double bill;
-	string name, date, time, roomNumber, roomType, paymentMethod;
+	string date, time, roomType;
 public:
 	void bookRoom();
 	void complain();
-	void payBill(string, double);
+	void payBill(double);
 	double calculateBill(string, int);
 
 };
@@ -26,25 +27,27 @@ void customer::bookRoom() {
 	cin >> roomType;
 	cout << "\n Enter number of days: ";
 	cin >> NumberOfDays;
+	cout << "\nPlease Enter your phone number: +92";
+	cin >> phone_number;
 
 	bill = calculateBill(roomType, NumberOfDays);
 
-	payBill(paymentMethod, bill);
-
+	payBill(bill);
 }
 
 void customer::complain() {
 	string complain_text;
 	cout << "\n---------------------------------------Complain Utility---------------------------------------";
 	cout << "\nPlease inform us about any problem below: " << endl;		
-	getline(cin, complain_text);
+	cin >> complain_text;
 	cout << "\nWe will make sure to provide you better service";
 
 }
 
-void customer::payBill(string method, double bill) {
+void customer::payBill(double bill) {
+	string method;
 	cout << "\nYour total bill is PKR " << bill << " only, would you like to pay through debit/credit card or cash? ";
-	cin >> paymentMethod;
+	cin >> method;
 
 	if ((method == "credit") || (method == "debit")) {
 		cout << "**********Cheer up! You are getting 14% off your total payment due**********";
